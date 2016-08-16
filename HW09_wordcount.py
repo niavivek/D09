@@ -46,8 +46,38 @@ import sys
 # Then print_words() and print_top() can just call the utility function.
 
 ###
+def print_words(filename):
+    words = word_helper(filename)
+    for key,values in words.items():
+        print(key,values)
 
+def print_top(filename):
+    words = word_helper(filename)
+    i = 0
+    while i < 20 and i < len(words):
+        for key in sorted(words, key = words.get, reverse = True):
+            print(key,words[key])
+            i += 1
 
+def word_helper(filename):
+    words = read_file(filename)
+    word_dict = histogram_word(words)
+    return word_dict
+
+def read_file(filename):
+    file_words = []
+    with open(filename,"r") as read_file:
+        for lines in read_file:
+            file_words += lines.split()
+    return file_words
+
+def histogram_word(s):
+    d = dict()
+    for c in s:
+        c = c.lower()
+        # returns default value when it already contains the value, else it increases the value by 1
+        d[c] = d.get(c, 0) + 1
+    return d
 # This basic command line argument parsing code is provided and
 # calls the print_words() and print_top() functions which you must define.
 def main():
