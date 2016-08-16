@@ -54,10 +54,11 @@ def print_words(filename):
 def print_top(filename):
     words = word_helper(filename)
     i = 0
-    while i < 20 and i < len(words):
-        for key in sorted(words, key = words.get, reverse = True):
-            print(key,words[key])
-            i += 1
+    for key in sorted(words, key = words.get, reverse = True):
+        print(key,words[key])
+        i += 1
+        if (i == 20):
+            break
 
 def word_helper(filename):
     words = read_file(filename)
